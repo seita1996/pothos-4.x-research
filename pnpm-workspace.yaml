@@ -1,0 +1,9 @@
+packages:
+  - .
+allowBuilds:
+  '@prisma/client': true
+  '@prisma/engines': true
+  prisma: true
+minimumReleaseAgeExclude:
+  - '@pothos/plugin-prisma@4.17.4'
+  - '@pothos/selection-mapper@0.3.1'

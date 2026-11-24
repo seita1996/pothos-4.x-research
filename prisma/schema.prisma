@@ -1,0 +1,23 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("WRITER_URL")
+}
+
+model User {
+  id    Int    @id
+  name  String
+  posts Post[]
+}
+
+model Post {
+  id       Int    @id
+  title    String
+  authorId Int
+  author   User   @relation(fields: [authorId], references: [id])
+
+  @@index([authorId])
+}

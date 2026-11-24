@@ -1,0 +1,31 @@
+name: pothos-prisma-replica-repro
+
+x-mysql: &mysql
+  image: mysql:8.4.7
+  tmpfs:
+    - /var/lib/mysql
+  environment:
+    MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+    MYSQL_DATABASE: repro
+    MYSQL_USER: repro
+    MYSQL_PASSWORD: local-repro-only
+  healthcheck:
+    test: ["CMD-SHELL", "mysql --protocol=tcp -h 127.0.0.1 -u\"$$MYSQL_USER\" -p\"$$MYSQL_PASSWORD\" \"$$MYSQL_DATABASE\" -e 'SELECT 1 FROM User LIMIT 1'"]
+    interval: 2s
+    timeout: 5s
+    retries: 45
+
+services:
+  writer:
+    <<: *mysql
+    ports:
+      - "127.0.0.1:${WRITER_PORT:-33061}:3306"
+    volumes:
+      - ./prisma/init.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+
+  reader:
+    <<: *mysql
+    ports:
+      - "127.0.0.1:${READER_PORT:-33062}:3306"
+    volumes:
+      - ./prisma/init.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro

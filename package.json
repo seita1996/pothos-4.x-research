@@ -1,0 +1,27 @@
+{
+  "name": "pothos-prisma-replica-repro",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@12.16.1",
+  "scripts": {
+    "generate": "prisma generate",
+    "repro": "node src/repro.mjs"
+  },
+  "dependencies": {
+    "@graphql-tools/executor": "2.0.1",
+    "@pothos/core": "4.18.1",
+    "@pothos/plugin-prisma": "4.17.4",
+    "@prisma/client": "6.19.0",
+    "graphql": "17.1.0",
+    "prisma-4-15-0": "npm:@pothos/plugin-prisma@4.15.0",
+    "prisma-4-16-0": "npm:@pothos/plugin-prisma@4.16.0",
+    "prisma-4-17-0": "npm:@pothos/plugin-prisma@4.17.0",
+    "prisma-4-17-1": "npm:@pothos/plugin-prisma@4.17.1",
+    "prisma-4-17-2": "npm:@pothos/plugin-prisma@4.17.2",
+    "prisma-4-17-3": "npm:@pothos/plugin-prisma@4.17.3"
+  },
+  "devDependencies": {
+    "prisma": "6.19.0"
+  }
+}
